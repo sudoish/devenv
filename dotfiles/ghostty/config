@@ -1,0 +1,19 @@
+font-family = "FiraCode"
+font-size = 18
+fullscreen = true
+theme = catppuccin-mocha
+
+# Tmux-style prefix keybindings
+keybind = cmd+h=previous_tab
+keybind = cmd+l=next_tab
+
+keybind = ctrl+a>v=new_split:right
+keybind = ctrl+a>s=new_split:down      # horizontal split (below)
+
+
+# Navigate between split panes using Ctrl + h/j/k/l
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+

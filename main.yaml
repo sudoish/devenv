@@ -1,0 +1,12 @@
+- name: Personal dev env
+  hosts: localhost
+  tasks:
+    - include_tasks: utils.yaml
+      tags:
+        - utils
+    - include_tasks: ssh.yaml
+      tags:
+        - ssh
+    - include_tasks: terminal.yaml
+      tags:
+        - terminal

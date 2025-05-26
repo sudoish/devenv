@@ -1,0 +1,30 @@
+- name: Terminal config
+  tags:
+    - terminal
+  block:
+    - name: Ensure ghostty dir exists
+      file:
+        path: ~/.config/ghostty
+        state: directory
+
+    - name: Stow ghostty config
+      shell: >
+        stow -t ~/.config/ghostty/ -d dotfiles ghostty
+      
+    - name: Change default shell to fish
+      become: yes
+      shell: >
+        chsh -s /usr/local/bin/fish
+
+    - name: Ensure fish dir exists
+      file:
+        path: ~/.config/fish
+        state: directory
+
+    - name: Stow fish config
+      shell: >
+        stow -t ~/.config/fish/ -d dotfiles fish
+
+    - name: Stow starship config
+      shell: >
+        stow -t ~/.config/ -d dotfiles starship

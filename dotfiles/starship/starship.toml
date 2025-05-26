@@ -1,0 +1,51 @@
+# ~/.config/starship.toml
+
+format = """
+$directory$git_branch$git_status$nodejs$python$rust$golang$docker_context$cmd_duration$line_break$character
+"""
+
+add_newline = true
+
+[directory]
+style = "bold lavender"
+read_only = " "
+read_only_style = "bold red"
+
+[git_branch]
+symbol = " "
+style = "bold peach"
+
+[git_status]
+style = "mauve"
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+vicmd_symbol = "[V](bold yellow)"
+
+[nodejs]
+symbol = " "
+style = "bold green"
+
+[python]
+symbol = " "
+style = "bold blue"
+
+[rust]
+symbol = " "
+style = "bold red"
+
+[golang]
+symbol = " "
+style = "bold cyan"
+
+[docker_context]
+symbol = " "
+style = "bold blue"
+
+[cmd_duration]
+min_time = 500
+style = "italic yellow"
+format = "took [$duration]($style)"
+
+

@@ -1,0 +1,46 @@
+- name: Install JQ
+  tags:
+    - utils
+  vars:
+    tools:
+      - jq
+      - fish
+      - starship
+      - curl
+      - stow
+      - fzf
+      - ripgrep
+      - zoxide
+      - make
+      - unzip
+      - gcc
+      - wget
+  block:
+    - name: Install utilities on macos
+      when: ansible_os_family == "Darwin"
+      with_items:
+        - "{{ tools }}"
+      homebrew:
+        name: "{{ item }}"
+        state: present
+
+    - name: Install utilities on arch
+      when: ansible_distribution == "Archlinux"
+      become: yes
+      become_user: root
+      with_items:
+        - "{{ tools }}"
+      pacman:
+        name: "{{ item }}"
+        state: present
+
+    - name: Install utilities on ubuntu
+      when: ansible_distribution == "Ubuntu"
+      become: yes
+      become_user: root
+      with_items:
+        - "{{ tools }}"
+      apt:
+        name: "{{ item }}"
+        state: present
+
