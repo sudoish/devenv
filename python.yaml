@@ -1,0 +1,9 @@
+- name: Python config
+  tags: [python]
+  block:
+    - name: Install uv
+      shell: curl -LsSf https://astral.sh/uv/install.sh | sh
+    - name: Install Python 3.11.9 with uv
+      shell: uv python install 3.11
+    - name: Pin python 3.11
+      shell: uv python pin 3.11
