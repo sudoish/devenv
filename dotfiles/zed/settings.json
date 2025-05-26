@@ -9,8 +9,8 @@
 {
   "agent": {
     "default_model": {
-      "provider": "ollama",
-      "model": "codellama:latest"
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-latest"
     },
     "model_parameters": [],
     "always_allow_tool_actions": true,
