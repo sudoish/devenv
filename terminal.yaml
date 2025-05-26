@@ -16,6 +16,16 @@
       shell: >
         chsh -s /usr/local/bin/fish
 
+    - name: Install fisher plugin manager for fish
+      become: false
+      ansible.builtin.shell: |
+        fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
+      args:
+        executable: /bin/bash
+      environment:
+        HOME: "{{ ansible_env.HOME }}"
+      when: ansible_env.SHELL is search('fish')
+
     - name: Ensure fish dir exists
       file:
         path: ~/.config/fish

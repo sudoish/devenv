@@ -10,3 +10,12 @@
     - include_tasks: terminal.yaml
       tags:
         - terminal
+    - include_tasks: git.yaml
+      tags:
+        - git
+    - include_tasks: nix.yaml
+      tags:
+        - nix
+    - include_tasks: node.yaml
+      tags:
+        - node

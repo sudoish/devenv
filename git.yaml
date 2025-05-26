@@ -1,0 +1,16 @@
+- name: Git default config
+  tags:
+    - git
+  block:
+    - name: use ssh instead of https
+      shell: |
+        git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+    - name: set default email
+      shell: |
+        git config --global user.email "thiagodelimapacheco@gmail.com"
+    - name: set default name
+      shell: |
+        git config --global user.name "Thiago Pacheco"
+    - name: set default branch
+      shell: |
+        git config --global init.defaultBranch main

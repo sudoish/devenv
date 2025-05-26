@@ -1,0 +1,7 @@
+- name: Nvm installation and setup
+  tags:
+    - node
+  block:
+    - name: Install nvm
+      shell: fish -c 'fisher install jorgebucaran/nvm.fish'
+

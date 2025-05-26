@@ -1,0 +1,20 @@
+- name: Check if nix is already installed
+  tags:
+    - nix
+  shell: nix --version
+  register: nix_installed
+  ignore_errors: yes
+- name: Install nix package manager
+  when: nix_installed is failed
+  tags:
+    - nix
+  become: yes
+  become_user: root
+  shell: curl -L https://nixos.org/nix/install | sh -s -- --daemon
+  ignore_errors: yes
+
+- name: Install devenv
+  tags:
+    - nix
+    - devenv
+  shell: nix-env --install --attr devenv -f https://github.com/NixOS/nixpkgs/tarball/nixpkgs-unstable
