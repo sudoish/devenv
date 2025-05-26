@@ -1,0 +1,7 @@
+- name: Zed editor config
+  tags:
+    - zed
+  block:
+    - name: Stow zed config
+      shell: >
+        stow -t ~/.config/zed/ -d dotfiles zed

@@ -1,0 +1,118 @@
+[
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      // put key-bindings here if you want them to work in normal & visual mode
+      // Toggle/untoggle file tree with leader + m
+      // "space m": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      // put key-bindings here if you want them to work only in normal mode
+      // "down": ["workspace::SendKeystrokes", "4 j"]
+      // "up": ["workspace::SendKeystrokes", "4 k"]
+      "space f s": "workspace::Save",
+      "space s f": "file_finder::Toggle",
+      "space s g": "pane::DeploySearch",
+      "space ;": "workspace::NewCenterTerminal",
+      "t t": "editor::SpawnNearestTask",
+      "t n": "task::Spawn",
+      // Editor
+      "space r": "editor::Rename",
+      // Navigation
+      "space tab": "tab_switcher::Toggle",
+      "g h": "pane::GoBack",
+      "g l": "pane::GoForward",
+      "L": "pane::ActivateNextItem",
+      "H": "pane::ActivatePreviousItem",
+
+      // Project
+      "z a": "editor::ToggleFold",
+      // Diagnostics
+      "[ d": "editor::GoToPreviousDiagnostic",
+      "] d": "editor::GoToDiagnostic",
+      "space q": "pane::CloseActiveItem",
+      // Git commands
+
+      "space f f": "file_finder::Toggle",
+      "-": "project_panel::ToggleFocus",
+
+      // AI
+      // Command K to open ai inline
+      "cmd-k": "assistant::InlineAssist",
+      "cmd-i": "agent::ToggleFocus",
+      "space l g": [
+        "task::Spawn",
+        {
+          "task_name": "lazygit"
+        }
+      ],
+      "space g b": "git::Branch"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "bindings": {
+      // visual, visual line & visual block modes
+      "cmd-i": "assistant::QuoteSelection",
+      "cmd-k": "assistant::InlineAssist"
+    }
+  },
+  // {
+  //   "context": "Editor && vim_mode == insert && !menu",
+  //   "bindings": {
+  //     // put key-bindings here if you want them to work in insert mode
+  //     // e.g.
+  //     // "j j": "vim::NormalBefore" // remap jj in insert mode to escape.
+  //   }
+  // },
+  {
+    "context": "Terminal",
+    "bindings": {
+      // put key-bindings here if you want them to work in insert mode
+      // e.g.
+      // "j j": "vim::NormalBefore" // remap jj in insert mode to escape.
+      "cmd-k": "assistant::InlineAssist",
+      "cmd-i": "agent::Chat"
+    }
+  },
+  {
+    "context": "ProjectPanel && !editing",
+    "bindings": {
+      // put key-bindings here if you want them to work in file finder
+      // e.g.
+      // "j j": "vim::NormalBefore" // remap jj in insert mode to escape.
+      "a": "project_panel::NewFile",
+      "d": "project_panel::Delete",
+      "r": "project_panel::Rename",
+      "q": "workspace::ToggleLeftDock",
+      "-": "workspace::ToggleLeftDock",
+      "cmd-w": "workspace::CloseAllDocks"
+    }
+  },
+  {
+    "context": "!Editor && !menu",
+    "bindings": {
+      // "space q": "workspace::CloseWindow",
+      // "space f f": "file_finder::Toggle"
+      // "space m": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    "context": "GitPanel && !CommitEditor",
+    "bindings": {
+      "s": "git::UnstageAll",
+      "c": "git::Commit",
+      "space q": "git_panel::Close",
+      "escape": "git_panel::Close"
+    }
+  },
+  {
+    "context": "GitPanel && CommitEditor",
+    "bindings": {
+      "escape": "git_panel::Close"
+    }
+  }
+]

@@ -16,6 +16,9 @@
     - include_tasks: nix.yaml
       tags:
         - nix
+    - include_tasks: zed.yaml
+      tags:
+        - zed
     - include_tasks: node.yaml
       tags:
         - node
