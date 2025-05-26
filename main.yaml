@@ -19,3 +19,6 @@
     - include_tasks: node.yaml
       tags:
         - node
+    - include_tasks: rust.yaml
+      tags:
+        - rust

@@ -38,3 +38,12 @@
     - name: Stow starship config
       shell: >
         stow -t ~/.config/ -d dotfiles starship
+
+    - name: Install zoxide with Homebrew
+      homebrew:
+        name: zoxide
+        state: present
+
+
+
+
