@@ -1,0 +1,38 @@
+- name: Install ngrok
+  tags:
+    - ngrok
+  block:
+    - name: Install ngrok on macOS
+      when: ansible_os_family == "Darwin"
+      homebrew:
+        name: ngrok
+        state: present
+
+    - name: Install ngrok on Arch Linux
+      when: ansible_distribution == "Archlinux"
+      become: yes
+      become_user: root
+      community.general.pacman:
+        name: ngrok
+        state: present
+
+    - name: Install ngrok on Ubuntu/Debian
+      when: ansible_distribution in ["Ubuntu", "Debian"]
+      become: yes
+      become_user: root
+      block:
+        - name: Add ngrok GPG key
+          apt_key:
+            url: https://ngrok-agent.s3.amazonaws.com/ngrok.asc
+            state: present
+
+        - name: Add ngrok repository
+          apt_repository:
+            repo: "deb https://ngrok-agent.s3.amazonaws.com buster main"
+            state: present
+
+        - name: Install ngrok
+          apt:
+            name: ngrok
+            state: present
+            update_cache: yes

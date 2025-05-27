@@ -28,3 +28,6 @@
     - include_tasks: python.yaml
       tags:
         - python
+    - include_tasks: ngrok.yaml
+      tags:
+        - ngrok
