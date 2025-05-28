@@ -19,8 +19,16 @@
   "context_servers": {
     "postgres-context-server": {
       "settings": {
-        "database_url": "postgresql://numbox:secretpass@localhost:5432/numbox"
+        "database_url": "postgresql://numbox:devpassword@localhost:5432/numbox"
       }
+    },
+    "linear": {
+      "command": {
+        "path": "npx",
+        "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
+        "env": {}
+      },
+      "settings": {}
     }
   },
   "features": {
