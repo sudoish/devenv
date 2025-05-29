@@ -1,0 +1,23 @@
+- name: Neovim installation and configuration
+  tags:
+    - neovim
+  block:
+    - name: Install Neovim on macOS
+      homebrew:
+        name: neovim
+        state: present
+      when: ansible_os_family == "Darwin"
+
+    - name: Install Neovim on Arch Linux
+      pacman:
+        name: neovim
+        state: present
+      when: ansible_os_family == "Archlinux"
+      become: yes
+
+    - name: Install Neovim on Ubuntu/Debian
+      apt:
+        name: neovim
+        state: present
+      when: ansible_os_family == "Debian"
+      become: yes

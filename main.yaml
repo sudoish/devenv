@@ -19,6 +19,9 @@
     - include_tasks: zed.yaml
       tags:
         - zed
+    - include_tasks: neovim.yaml
+      tags:
+        - neovim
     - include_tasks: node.yaml
       tags:
         - node
@@ -31,3 +34,6 @@
     - include_tasks: ngrok.yaml
       tags:
         - ngrok
+    - include_tasks: karabiner.yaml
+      tags:
+        - karabiner
