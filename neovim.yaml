@@ -21,3 +21,9 @@
         state: present
       when: ansible_os_family == "Debian"
       become: yes
+
+    - name: Clone Neovim configuration
+      git:
+        repo: https://github.com/pachecoio/neovim.git
+        dest: "{{ ansible_env.HOME }}/.config/nvim"
+        force: yes

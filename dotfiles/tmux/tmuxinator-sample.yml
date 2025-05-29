@@ -1,0 +1,20 @@
+# Sample tmuxinator configuration
+# Copy to ~/.config/tmuxinator/ and customize as needed
+# Usage: tm devenv
+
+name: devenv
+root: ~/dev
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - zed .
+        - fish
+  - server:
+      layout: even-horizontal
+      panes:
+        - npm run dev
+        - npm run test
+  - shell:
+      - fish

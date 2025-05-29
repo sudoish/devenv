@@ -37,3 +37,6 @@
     - include_tasks: karabiner.yaml
       tags:
         - karabiner
+    - include_tasks: tmux.yaml
+      tags:
+        - tmux

@@ -2,6 +2,15 @@
   tags:
     - node
   block:
+    - name: Ensure fisher is installed
+      ansible.builtin.shell: |
+        fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
+      args:
+        executable: /bin/bash
+      environment:
+        HOME: "{{ ansible_env.HOME }}"
+      ignore_errors: yes
+
     - name: Install nvm
       shell: fish -c 'fisher install jorgebucaran/nvm.fish'
 

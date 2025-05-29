@@ -1,0 +1,82 @@
+- name: Install and configure tmux
+  tags: [tmux]
+  block:
+    - name: Install tmux (macOS)
+      homebrew:
+        name: tmux
+        state: present
+      when: ansible_os_family == "Darwin"
+      tags: tmux
+
+    - name: Install tmux (Arch Linux)
+      pacman:
+        name: tmux
+        state: present
+      become: yes
+      when: ansible_distribution == "Archlinux"
+      tags: tmux
+
+    - name: Install tmux (Ubuntu/Debian)
+      apt:
+        name: tmux
+        state: present
+        update_cache: yes
+      become: yes
+      when: ansible_os_family == "Debian"
+      tags: tmux
+
+    - name: Install tmux plugin manager (TPM)
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+        update: yes
+      tags: tmux
+
+    - name: Install tmuxinator (macOS)
+      homebrew:
+        name: tmuxinator
+        state: present
+      when: ansible_os_family == "Darwin"
+      tags: tmux
+
+    - name: Install tmuxinator (Arch Linux)
+      pacman:
+        name: tmuxinator
+        state: present
+      become: yes
+      when: ansible_distribution == "Archlinux"
+      tags: tmux
+
+    - name: Install tmuxinator (Ubuntu/Debian)
+      apt:
+        name: tmuxinator
+        state: present
+        update_cache: yes
+      become: yes
+      when: ansible_os_family == "Debian"
+      tags: tmux
+
+    - name: Create tmux dotfiles directory
+      file:
+        path: "{{ ansible_env.HOME }}/dev/devenv/dotfiles/tmux"
+        state: directory
+        mode: '0755'
+      tags: tmux
+
+    - name: Create tmuxinator config directory
+      file:
+        path: "{{ ansible_env.HOME }}/.config/tmuxinator"
+        state: directory
+        mode: '0755'
+      tags: tmux
+
+    - name: Apply tmux dotfiles using stow
+      command: stow -t "{{ ansible_env.HOME }}" tmux
+      args:
+        chdir: "{{ ansible_env.HOME }}/dev/devenv/dotfiles"
+      changed_when: false
+      tags: tmux
+
+    - name: Install tmux plugins automatically
+      command: "{{ ansible_env.HOME }}/.tmux/plugins/tpm/scripts/install_plugins.sh"
+      tags: tmux

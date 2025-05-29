@@ -13,8 +13,3 @@
   shell: curl -L https://nixos.org/nix/install | sh -s -- --daemon
   ignore_errors: yes
 
-- name: Install devenv
-  tags:
-    - nix
-    - devenv
-  shell: nix-env --install --attr devenv -f https://github.com/NixOS/nixpkgs/tarball/nixpkgs-unstable

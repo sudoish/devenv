@@ -2,6 +2,12 @@
   tags:
     - zed
   block:
+    - name: Create zed config directory
+      file:
+        path: ~/.config/zed
+        state: directory
+        mode: '0755'
+    
     - name: Stow zed config
       shell: >
         stow -t ~/.config/zed/ -d dotfiles zed

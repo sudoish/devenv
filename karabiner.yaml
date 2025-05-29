@@ -1,0 +1,17 @@
+- name: Karabiner config
+  tags:
+    - karabiner
+  block:
+    - name: Ensure karabiner config dir exists
+      file:
+        path: ~/.config/karabiner
+        state: directory
+
+    - name: Stow karabiner config
+      shell: >
+        stow --adopt -t ~/.config/karabiner/ -d dotfiles karabiner
+
+    - name: Install karabiner-elements with Homebrew
+      homebrew_cask:
+        name: karabiner-elements
+        state: present
