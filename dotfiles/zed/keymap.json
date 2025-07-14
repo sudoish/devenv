@@ -18,6 +18,12 @@
       "space s g": "pane::DeploySearch",
       "space ;": "workspace::NewCenterTerminal",
       "t t": "editor::SpawnNearestTask",
+      "t f": [
+        "task::Spawn",
+        {
+          "task_name": "pytest: Run tests for current file"
+        }
+      ],
       "t n": "task::Spawn",
       // Editor
       "space r": "editor::Rename",
@@ -37,7 +43,7 @@
       // Git commands
 
       "space f f": "file_finder::Toggle",
-      "-": "project_panel::ToggleFocus",
+      "-": "pane::RevealInProjectPanel",
 
       // AI
       // Command K to open ai inline
@@ -115,5 +121,9 @@
     "bindings": {
       "escape": "git_panel::Close"
     }
+  },
+  {
+    "context": "AgentPanel && thread_list",
+    "bindings": {}
   }
 ]
