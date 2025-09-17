@@ -16,5 +16,10 @@
       "reveal": "always",
       "panel": "new"
     }
+  },
+  {
+    "label": "obsidian-search",
+    "command": "open",
+    "args": ["obsidian://search?vault=TestVault"]
   }
 ]

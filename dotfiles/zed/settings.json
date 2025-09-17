@@ -14,8 +14,7 @@
       "model": "claude-sonnet-4"
     },
     "model_parameters": [],
-    "always_allow_tool_actions": true,
-    "version": "2"
+    "always_allow_tool_actions": true
   },
   "context_servers": {
     "postgres-context-server": {
@@ -26,21 +25,17 @@
     },
     "linear": {
       "source": "custom",
-      "command": {
-        "path": "npx",
-        "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
-        "env": {}
-      },
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
+      "env": {},
       "settings": {}
     },
     "notion": {
       "source": "custom",
-      "command": {
-        "path": "npx",
-        "args": ["-y", "@notionhq/notion-mcp-server"],
-        "env": {
-          "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer YOUR_NOTION_API_KEY\", \"Notion-Version\": \"2022-06-28\" }"
-        }
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer YOUR_NOTION_API_KEY\", \"Notion-Version\": \"2022-06-28\" }"
       }
     }
   },
@@ -125,12 +120,17 @@
       "initialization_options": {
         "settings": {
           // Ruff server settings goes here
-          "lineLength": 80,
+          // "lineLength": 80,
           "lint": {
             "extendSelect": ["I"]
           }
         }
       }
     }
+  },
+  "obsidian": {
+    "vault_name": "My Vault",
+    "vault_path": "/Users/pacheco/personal",
+    "default_content": "---\ndate: {{date}}\ntitle: {{title}}\n---\n\n# {{title}}\n\n"
   }
 }

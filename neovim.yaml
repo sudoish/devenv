@@ -24,6 +24,6 @@
 
     - name: Clone Neovim configuration
       git:
-        repo: https://github.com/pachecoio/neovim.git
+        repo: https://github.com/sudoish/nvchad.git
         dest: "{{ ansible_env.HOME }}/.config/nvim"
         force: yes

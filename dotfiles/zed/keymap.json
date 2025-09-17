@@ -56,7 +56,25 @@
         }
       ],
       "space g b": "git::Branch",
-      "cmd-enter": "agent::KeepAll"
+      "cmd-enter": "agent::KeepAll",
+      "space o s": [
+        "task::Spawn",
+        {
+          "task_name": "obsidian-search"
+        }
+      ],
+      "space o n": [
+        "task::Spawn",
+        {
+          "task_name": "obsidian-new"
+        }
+      ],
+      "space o d": [
+        "task::Spawn",
+        {
+          "task_name": "obsidian-daily"
+        }
+      ]
     }
   },
   {
