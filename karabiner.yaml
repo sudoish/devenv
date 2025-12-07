@@ -1,6 +1,7 @@
 - name: Karabiner config
   tags:
     - karabiner
+  when: ansible_os_family == "Darwin"
   block:
     - name: Ensure karabiner config dir exists
       file:

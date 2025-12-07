@@ -1,18 +1,30 @@
-font-family = "FiraCode"
-font-size = 18
-fullscreen = true
-theme = catppuccin-mocha
+# Dynamic theme colors
+config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
 
-keybind = cmd+h=previous_tab
-keybind = cmd+l=next_tab
+# Font
+font-family = "JetBrainsMono Nerd Font"
+font-style = Regular
+font-size = 14
 
-keybind = ctrl+a>v=new_split:right
-keybind = ctrl+a>s=new_split:down
+# Window
+window-padding-x = 0
+window-padding-y = 0
+confirm-close-surface=false
+resize-overlay = never
 
+# Cursor stlying
+cursor-style = "block"
+cursor-style-blink = false
+shell-integration-features = no-cursor
 
-# keybind = ctrl+h=goto_split:left
-# keybind = ctrl+j=goto_split:bottom
-# keybind = ctrl+k=goto_split:top
-# keybind = ctrl+l=goto_split:right
+# Keyboard bindings
+keybind = f11=toggle_fullscreen
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+keybind = super+control+shift+alt+arrow_down=resize_split:down,100
+keybind = super+control+shift+alt+arrow_up=resize_split:up,100
+keybind = super+control+shift+alt+arrow_left=resize_split:left,100
+keybind = super+control+shift+alt+arrow_right=resize_split:right,100
 
-keybind = shift+enter=text:\n
+# Slowdown mouse scrolling
+mouse-scroll-multiplier = 0.95

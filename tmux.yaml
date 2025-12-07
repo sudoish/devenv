@@ -71,7 +71,7 @@
       tags: tmux
 
     - name: Apply tmux dotfiles using stow
-      command: stow -t "{{ ansible_env.HOME }}" tmux
+      command: stow --adopt -t "{{ ansible_env.HOME }}" tmux
       args:
         chdir: "{{ ansible_env.HOME }}/dev/devenv/dotfiles"
       changed_when: false

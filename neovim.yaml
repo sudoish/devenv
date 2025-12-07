@@ -23,7 +23,10 @@
       become: yes
 
     - name: Clone Neovim configuration
-      git:
-        repo: https://github.com/sudoish/nvchad.git
+      ansible.builtin.git:
+        repo: 'https://github.com/sudoish/nvchad.git'
+        depth: 1
         dest: "{{ ansible_env.HOME }}/.config/nvim"
         force: yes
+      environment:
+        GIT_CONFIG_GLOBAL: /dev/null

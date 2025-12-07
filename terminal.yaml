@@ -9,12 +9,19 @@
 
     - name: Stow ghostty config
       shell: >
-        stow -t ~/.config/ghostty/ -d dotfiles ghostty
+        stow --adopt -t ~/.config/ghostty/ -d dotfiles ghostty
       
     - name: Change default shell to fish
+      when: ansible_os_family == "Darwin"
       become: yes
       shell: >
         chsh -s /usr/local/bin/fish
+
+    - name: Change default shell to fish
+      become: yes
+      shell: >
+        chsh -s /usr/bin/fish
+
 
     - name: Install fisher plugin manager for fish
       become: false
@@ -33,17 +40,15 @@
 
     - name: Stow fish config
       shell: >
-        stow -t ~/.config/fish/ -d dotfiles fish
+        stow --adopt -t ~/.config/fish/ -d dotfiles fish
 
     - name: Stow starship config
       shell: >
-        stow -t ~/.config/ -d dotfiles starship
+        stow --adopt -t ~/.config/ -d dotfiles starship
 
     - name: Install zoxide with Homebrew
+      when: ansible_os_family == "Darwin"
       homebrew:
         name: zoxide
         state: present
-
-
-
 

@@ -4,7 +4,7 @@
   block:
     - name: use ssh instead of https
       shell: |
-        git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+        git config --global url.ssh://git@github.com/sudoish.insteadOf https://github.com/sudoish
     - name: set default email
       shell: |
         git config --global user.email "thiagodelimapacheco@gmail.com"

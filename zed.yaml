@@ -10,4 +10,4 @@
     
     - name: Stow zed config
       shell: >
-        stow -t ~/.config/zed/ -d dotfiles zed
+        stow --adopt -t ~/.config/zed/ -d dotfiles zed
