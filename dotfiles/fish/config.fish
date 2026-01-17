@@ -4,7 +4,7 @@ alias cd="z"
 alias vim="nvim"
 alias tm="tmuxinator"
 set -gx EDITOR nvim
-set -gx WORKDIR /Users/pacheco/dev
+set -gx WORKDIR $HOME/dev
 set -gx PATH "$HOME/.local/bin" $PATH
 
 # NGROK_TOKEN should be set as an environment variable or in a secrets file
@@ -22,7 +22,7 @@ end
 alias lg='lazygit'
 
 # opencode
-fish_add_path /Users/pacheco/.opencode/bin
+fish_add_path $HOME/.opencode/bin
 # rbenv init - fish | source
 
 # bun
@@ -30,4 +30,4 @@ set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 fish_add_path $HOME/.local/bin
 
-alias claude="/Users/pacheco/.claude/local/claude"
+fish_add_path $HOME/.config/emacs/bin
