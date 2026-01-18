@@ -11,6 +11,16 @@ resize-overlay = never
 cursor-style = "block"
 cursor-style-blink = false
 shell-integration-features = no-cursor
+font-family = "FiraCode"
+font-size = 18
+fullscreen = true
+theme = TokyoNight Night
+
+# keybind = cmd+h=previous_tab
+# keybind = cmd+l=next_tab
+
+# keybind = ctrl+a>v=new_split:right
+# keybind = ctrl+a>s=new_split:down
 
 # Keyboard bindings
 keybind = f11=toggle_fullscreen

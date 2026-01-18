@@ -7,33 +7,77 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "prettier": {
+    "allowed": false
+  },
+  "zoomed_padding": true,
+  "active_pane_modifiers": {
+    "border_size": 0.0
+  },
+  "use_system_window_tabs": true,
+  "preview_tabs": {
+    "enable_keep_preview_on_code_navigation": true,
+    "enable_preview_from_file_finder": true
+  },
+  "tabs": {
+    "file_icons": false,
+    "git_status": false
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_sign_in": true,
+    "show_user_picture": false,
+    "show_onboarding_banner": false,
+    "show_project_items": true,
+    "show_branch_name": true,
+    "show_branch_icon": true
+  },
+  "debugger": {
+    "button": false
+  },
+  "search": {
+    "button": false
+  },
+  "diagnostics": {
+    "button": false
+  },
+  "status_bar": {
+    "cursor_position_button": false,
+    "active_language_button": false
+  },
+  "ui_font_family": "FiraCode Nerd Font",
   "agent": {
+    "dock": "right",
     "default_profile": "write",
+    "always_allow_tool_actions": true,
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest"
     },
-    "model_parameters": [],
-    "always_allow_tool_actions": true
+    "model_parameters": []
   },
   "context_servers": {
     "postgres-context-server": {
-      "source": "extension",
       "settings": {
         "database_url": "postgresql://numbox:devpassword@localhost:5432/numbox"
       }
     },
     "linear": {
-      "source": "custom",
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.linear.app/sse"
+      ],
       "env": {},
       "settings": {}
     },
     "notion": {
-      "source": "custom",
       "command": "npx",
-      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "args": [
+        "-y",
+        "@notionhq/notion-mcp-server"
+      ],
       "env": {
         "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer YOUR_NOTION_API_KEY\", \"Notion-Version\": \"2022-06-28\" }"
       }
@@ -43,14 +87,18 @@
     "edit_prediction_provider": "zed"
   },
   "base_keymap": "VSCode",
-  "theme": "Catppuccin Mocha",
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha"
+  },
   "vim_mode": true,
-  "ui_font_size": 18,
+  "ui_font_size": 18.0,
   "buffer_font_size": 18,
   "buffer_font_family": "FiraCode Nerd Font",
   "format_on_save": "on",
-  "relative_line_numbers": true,
-  "agent_font_size": 22,
+  "relative_line_numbers": "enabled",
+  "agent_ui_font_size": 18.0,
   "terminal": {
     "toolbar": {
       "breadcrumbs": false
@@ -65,8 +113,19 @@
     "right_padding": 0
   },
   "bottom_dock_layout": "full",
-  "icon_theme": "Catppuccin Mocha",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha"
+  },
   "project_panel": {
+    "hide_hidden": false,
+    "hide_root": false,
+    "git_status": true,
+    "folder_icons": true,
+    "file_icons": true,
+    "default_width": 400.0,
+    "dock": "left",
     "button": false,
     "auto_reveal_entries": false,
     "auto_fold_dirs": true
@@ -80,22 +139,24 @@
     "selections_menu": false
   },
   "tab_bar": {
+    "show": false,
     "show_nav_history_buttons": false,
     "show_tab_bar_buttons": false
   },
   "show_call_status_icon": false,
   "languages": {
     "Python": {
-      "language_servers": ["pyright", "ruff"],
+      "language_servers": [
+        "pyright",
+        "ruff"
+      ],
       "format_on_save": "on",
       "formatter": [
         {
-          "code_actions": {
-            // Fix all auto-fixable lint violations
-            "source.fixAll.ruff": true,
-            // Organize imports
-            "source.organizeImports.ruff": true
-          }
+          "code_action": "source.fixAll.ruff"
+        },
+        {
+          "code_action": "source.organizeImports.ruff"
         },
         {
           "language_server": {
@@ -122,7 +183,9 @@
           // Ruff server settings goes here
           // "lineLength": 80,
           "lint": {
-            "extendSelect": ["I"]
+            "extendSelect": [
+              "I"
+            ]
           }
         }
       }
