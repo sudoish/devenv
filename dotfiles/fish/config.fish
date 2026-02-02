@@ -31,3 +31,8 @@ set --export PATH $BUN_INSTALL/bin $PATH
 fish_add_path $HOME/.local/bin
 
 fish_add_path $HOME/.config/emacs/bin
+
+# npm global packages
+fish_add_path $HOME/.npm-global/bin
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
