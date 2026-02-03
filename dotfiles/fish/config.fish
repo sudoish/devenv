@@ -1,3 +1,4 @@
+eval (/opt/homebrew/bin/brew shellenv)
 starship init fish | source
 zoxide init fish | source
 alias cd="z"
@@ -5,6 +6,7 @@ alias vim="nvim"
 alias tm="tmuxinator"
 set -gx EDITOR nvim
 set -gx WORKDIR $HOME/dev
+set -gx DYLD_FALLBACK_LIBRARY_PATH /opt/homebrew/opt/libmagic/lib $DYLD_FALLBACK_LIBRARY_PATH
 set -gx PATH "$HOME/.local/bin" $PATH
 
 # NGROK_TOKEN should be set as an environment variable or in a secrets file

@@ -6,7 +6,9 @@
     "reveal": "always",
     "hide": "on_success",
     "reveal_target": "center",
-    "tags": ["lazygit"]
+    "tags": [
+      "lazygit"
+    ]
   },
   {
     "label": "pytest: Run tests for current file",
@@ -20,6 +22,8 @@
   {
     "label": "obsidian-search",
     "command": "open",
-    "args": ["obsidian://search?vault=TestVault"]
+    "args": [
+      "obsidian://search?vault=TestVault"
+    ]
   }
 ]

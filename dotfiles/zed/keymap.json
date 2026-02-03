@@ -16,7 +16,7 @@
       "space f s": "workspace::Save",
       "space s f": "file_finder::Toggle",
       "space s g": "pane::DeploySearch",
-      "space ;": "workspace::NewCenterTerminal",
+      "space ;": "terminal_panel::ToggleFocus",
       "t t": "editor::SpawnNearestTask",
       "t f": [
         "task::Spawn",
@@ -33,7 +33,6 @@
       "g l": "pane::GoForward",
       "L": "pane::ActivateNextItem",
       "H": "pane::ActivatePreviousItem",
-
       // Project
       "z a": "editor::ToggleFold",
       // Diagnostics
@@ -41,10 +40,8 @@
       "] d": "editor::GoToDiagnostic",
       "space q": "pane::CloseActiveItem",
       // Git commands
-
       "space f f": "file_finder::Toggle",
       "-": "pane::RevealInProjectPanel",
-
       // AI
       // Command K to open ai inline
       "cmd-k": "assistant::InlineAssist",
@@ -75,7 +72,9 @@
           "task_name": "obsidian-daily"
         }
       ],
-      "space e": "editor::ToggleTabBar"
+      "space e": "editor::ToggleTabBar",
+      "ctrl-h": "window::ShowPreviousWindowTab",
+      "ctrl-l": "window::ShowNextWindowTab"
     }
   },
   {
@@ -144,5 +143,12 @@
   {
     "context": "AgentPanel && thread_list",
     "bindings": {}
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-h": "window::ShowPreviousWindowTab",
+      "ctrl-l": "window::ShowNextWindowTab"
+    }
   }
 ]

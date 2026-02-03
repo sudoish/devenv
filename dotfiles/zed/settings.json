@@ -98,14 +98,15 @@
   "buffer_font_family": "FiraCode Nerd Font",
   "format_on_save": "on",
   "relative_line_numbers": "enabled",
-  "agent_ui_font_size": 18.0,
+  "agent_ui_font_size": 20.0,
+  "agent_buffer_font_size": 20.0,
   "terminal": {
     "toolbar": {
       "breadcrumbs": false
     },
     "button": false,
     "shell": {
-      "program": "fish"
+      "program": "sh"
     }
   },
   "centered_layout": {
