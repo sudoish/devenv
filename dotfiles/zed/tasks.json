@@ -25,5 +25,77 @@
     "args": [
       "obsidian://search?vault=TestVault"
     ]
+  },
+
+  // --- work dev servers (mirrors ~/.config/tmuxinator/work.yml:12-17) ---
+  // Each is individually runnable and pins an absolute cwd. They share the
+  // "start-services" tag so they cluster in the task picker. Firing all six in
+  // one shot is the launcher's job — this umbrella task and the `zw` CLI both
+  // call the same fish function, so the bulk-start logic lives in one place.
+  {
+    "label": "start-services",
+    "command": "zw --services-only",
+    "use_new_terminal": true,
+    "reveal": "always"
+  },
+  {
+    "label": "serve: numbox (api)",
+    "command": "source .venv/bin/activate.fish && task start",
+    "cwd": "/Users/pacheco/work/numbox",
+    "use_new_terminal": true,
+    "reveal": "always",
+    "tags": [
+      "start-services"
+    ]
+  },
+  {
+    "label": "serve: numbox (celery)",
+    "command": "source .venv/bin/activate.fish && task start-celery-mac-os-tahoe",
+    "cwd": "/Users/pacheco/work/numbox",
+    "use_new_terminal": true,
+    "reveal": "always",
+    "tags": [
+      "start-services"
+    ]
+  },
+  {
+    "label": "serve: numbox-web",
+    "command": "yarn start",
+    "cwd": "/Users/pacheco/work/numbox-clients/packages/numbox-web",
+    "use_new_terminal": true,
+    "reveal": "always",
+    "tags": [
+      "start-services"
+    ]
+  },
+  {
+    "label": "serve: numa-agents",
+    "command": "source .venv/bin/activate.fish && task dev",
+    "cwd": "/Users/pacheco/work/agents/numa-agents",
+    "use_new_terminal": true,
+    "reveal": "always",
+    "tags": [
+      "start-services"
+    ]
+  },
+  {
+    "label": "serve: ngrok",
+    "command": "ngrok start --all",
+    "cwd": "/Users/pacheco/work",
+    "use_new_terminal": true,
+    "reveal": "always",
+    "tags": [
+      "start-services"
+    ]
+  },
+  {
+    "label": "serve: specs-ui",
+    "command": "./scripts/start-specs-ui.sh",
+    "cwd": "/Users/pacheco/work",
+    "use_new_terminal": true,
+    "reveal": "always",
+    "tags": [
+      "start-services"
+    ]
   }
 ]

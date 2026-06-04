@@ -25,6 +25,12 @@
         }
       ],
       "t n": "task::Spawn",
+      "t s": [
+        "task::Spawn",
+        {
+          "task_name": "start-services"
+        }
+      ],
       // Editor
       "space r": "editor::Rename",
       // Navigation
@@ -54,6 +60,9 @@
       ],
       "space g b": "git::Branch",
       "cmd-enter": "agent::KeepAll",
+      // Worktree (D3): replaces nvim <leader>at task-workflow. Creates/switches a
+      // git worktree; run the agent panel (cmd-i) inside it for AI-in-worktree.
+      "space a t": "git::Worktree",
       "space o s": [
         "task::Spawn",
         {
@@ -73,8 +82,13 @@
         }
       ],
       "space e": "editor::ToggleTabBar",
-      "ctrl-h": "window::ShowPreviousWindowTab",
-      "ctrl-l": "window::ShowNextWindowTab"
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      // tmux-prefix-style window-tab switch (shadows vim ctrl-a increment here)
+      "ctrl-a h": "window::ShowPreviousWindowTab",
+      "ctrl-a l": "window::ShowNextWindowTab"
     }
   },
   {
@@ -85,14 +99,13 @@
       "cmd-k": "assistant::InlineAssist"
     }
   },
-  // {
-  //   "context": "Editor && vim_mode == insert && !menu",
-  //   "bindings": {
-  //     // put key-bindings here if you want them to work in insert mode
-  //     // e.g.
-  //     // "j j": "vim::NormalBefore" // remap jj in insert mode to escape.
-  //   }
-  // },
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      // nvim parity: `jk` escapes to normal mode (mappings.lua `map("i","jk","<ESC>")`)
+      "j k": "vim::NormalBefore"
+    }
+  },
   {
     "context": "Terminal",
     "bindings": {
@@ -145,10 +158,33 @@
     "bindings": {}
   },
   {
+    // Chat input (ACP agents + Zed-native): scroll the transcript WITHOUT leaving
+    // the input. Zed keeps focus in the input box — the history isn't a vim-focus
+    // target — so ctrl-k/ctrl-j scroll via actions instead of moving focus.
+    "context": "(AcpThread > Editor) || (MessageEditor > Editor)",
+    "bindings": {
+      "ctrl-k": "agent::ScrollOutputLineUp",
+      "ctrl-j": "agent::ScrollOutputLineDown"
+    }
+  },
+  {
+    // Chat transcript when focused directly (e.g. clicked in): bare vim j/k scroll.
+    "context": "AgentPanel && !MessageEditor",
+    "bindings": {
+      "j": "agent::ScrollOutputLineDown",
+      "k": "agent::ScrollOutputLineUp"
+    }
+  },
+  {
     "context": "Workspace",
     "bindings": {
-      "ctrl-h": "window::ShowPreviousWindowTab",
-      "ctrl-l": "window::ShowNextWindowTab"
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      // tmux-prefix-style window-tab switch (left / right) across open projects
+      "ctrl-a h": "window::ShowPreviousWindowTab",
+      "ctrl-a l": "window::ShowNextWindowTab"
     }
   }
 ]
