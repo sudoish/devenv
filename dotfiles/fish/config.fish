@@ -32,9 +32,15 @@ set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 fish_add_path $HOME/.local/bin
 
-fish_add_path $HOME/.config/emacs/bin
+fish_add_path $HOME/.emacs.d/bin
 
 # npm global packages
 fish_add_path $HOME/.npm-global/bin
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
+fish_add_path $HOME/develop/flutter/bin
+
+# Android SDK
+set -gx ANDROID_HOME /opt/homebrew/share/android-commandlinetools
+fish_add_path $ANDROID_HOME/platform-tools
+
+eval "$(/opt/homebrew/bin/brew shellenv fish)"
