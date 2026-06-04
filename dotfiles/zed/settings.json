@@ -7,6 +7,32 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "agent_servers": {
+    "opencode": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    },
+    "amp-acp": {
+      "type": "registry"
+    }
+  },
+  "edit_predictions": {
+    "provider": "zed"
+  },
   "prettier": {
     "allowed": false
   },
@@ -45,14 +71,18 @@
     "cursor_position_button": false,
     "active_language_button": false
   },
-  "ui_font_family": "FiraCode Nerd Font",
+  "ui_font_family": "FiraCode Nerd Font Mono",
   "agent": {
-    "dock": "right",
+    "tool_permissions": {
+      "default": "allow"
+    },
+    "dock": "left",
     "default_profile": "write",
-    "always_allow_tool_actions": true,
     "default_model": {
-      "provider": "anthropic",
-      "model": "claude-sonnet-4-5-latest"
+      "effort": "high",
+      "enable_thinking": true,
+      "provider": "copilot_chat",
+      "model": "gemini-3.1-pro-preview"
     },
     "model_parameters": []
   },
@@ -83,19 +113,16 @@
       }
     }
   },
-  "features": {
-    "edit_prediction_provider": "zed"
-  },
   "base_keymap": "VSCode",
   "theme": {
     "mode": "system",
     "light": "Catppuccin Mocha",
-    "dark": "Catppuccin Mocha"
+    "dark": "Fleet Dark Purple"
   },
   "vim_mode": true,
   "ui_font_size": 18.0,
   "buffer_font_size": 18,
-  "buffer_font_family": "FiraCode Nerd Font",
+  "buffer_font_family": "FiraCode Nerd Font Mono",
   "format_on_save": "on",
   "relative_line_numbers": "enabled",
   "agent_ui_font_size": 20.0,
@@ -106,7 +133,7 @@
     },
     "button": false,
     "shell": {
-      "program": "sh"
+      "program": "fish"
     }
   },
   "centered_layout": {
@@ -126,7 +153,7 @@
     "folder_icons": true,
     "file_icons": true,
     "default_width": 400.0,
-    "dock": "left",
+    "dock": "right",
     "button": false,
     "auto_reveal_entries": false,
     "auto_fold_dirs": true
