@@ -10,6 +10,13 @@
     - name: Stow ghostty config
       shell: >
         stow --adopt -t ~/.config/ghostty/ -d dotfiles ghostty
+
+    - name: Create macOS ghostty platform overrides
+      when: ansible_os_family == "Darwin"
+      copy:
+        dest: ~/.config/ghostty/platform.conf
+        content: |
+          font-size = 18
       
     - name: Change default shell to fish
       when: ansible_os_family == "Darwin"
