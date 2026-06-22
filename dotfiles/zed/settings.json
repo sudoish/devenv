@@ -117,7 +117,7 @@
   "theme": {
     "mode": "system",
     "light": "Catppuccin Mocha",
-    "dark": "Fleet Dark Purple"
+    "dark": "Catppuccin Mocha - No Italics"
   },
   "vim_mode": true,
   "ui_font_size": 18.0,

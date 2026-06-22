@@ -47,7 +47,13 @@
       "space q": "pane::CloseActiveItem",
       // Git commands
       "space f f": "file_finder::Toggle",
+      // Project tree: `-` reveals the current file in the panel (opens + focuses
+      // the left dock and jumps to the file). `_` opens the tree at the project
+      // root — Zed has no single "open at root" action, so chain it: reveal (to
+      // focus the panel) → collapse all → select first. The `z m` / `g g` legs
+      // are bound in the ProjectPanel context below.
       "-": "pane::RevealInProjectPanel",
+      "_": ["workspace::SendKeystrokes", "- z m g g"],
       // AI
       // Command K to open ai inline
       "cmd-k": "assistant::InlineAssist",
@@ -127,6 +133,12 @@
       "r": "project_panel::Rename",
       "q": "workspace::ToggleLeftDock",
       "-": "workspace::ToggleLeftDock",
+      // Root navigation: `g g` jumps to the top entry, `z m` collapses the whole
+      // tree. The editor's `_` SendKeystrokes chain drives both; `_` here also
+      // re-roots when focus is already in the panel.
+      "g g": "menu::SelectFirst",
+      "z m": "project_panel::CollapseAllEntries",
+      "_": "project_panel::CollapseAllEntries",
       "cmd-w": "workspace::CloseAllDocks"
     }
   },

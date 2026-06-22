@@ -8,13 +8,18 @@
         name: ngrok
         state: present
 
+    # ngrok is not in the official Arch repos (only the AUR), so install the
+    # official static binary that ngrok publishes for Linux.
     - name: Install ngrok on Arch Linux
       when: ansible_distribution == "Archlinux"
       become: yes
       become_user: root
-      community.general.pacman:
-        name: ngrok
-        state: present
+      unarchive:
+        src: "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}.tgz"
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: "0755"
+        creates: /usr/local/bin/ngrok
 
     - name: Install ngrok on Ubuntu/Debian
       when: ansible_distribution in ["Ubuntu", "Debian"]
