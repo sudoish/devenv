@@ -39,10 +39,21 @@
       when: ansible_os_family == "Darwin"
       tags: tmux
 
-    - name: Install tmuxinator (Arch Linux)
+    # tmuxinator is not in the official Arch repos (only the AUR); it is a Ruby
+    # gem, so install Ruby and then the gem directly.
+    - name: Install Ruby (Arch Linux)
       pacman:
+        name: ruby
+        state: present
+      become: yes
+      when: ansible_distribution == "Archlinux"
+      tags: tmux
+
+    - name: Install tmuxinator (Arch Linux)
+      gem:
         name: tmuxinator
         state: present
+        user_install: no
       become: yes
       when: ansible_distribution == "Archlinux"
       tags: tmux
