@@ -17,6 +17,16 @@
         dest: ~/.config/ghostty/platform.conf
         content: |
           font-size = 18
+
+    - name: Create Arch Linux ghostty platform overrides
+      when: ansible_facts["distribution"] == "Archlinux"
+      copy:
+        dest: ~/.config/ghostty/arch.conf
+        mode: "0644"
+        content: |
+          # Avoid the Ghostty 1.3.1 epoll crash triggered by Herdr session redraws.
+          # "auto" selects the best available backend (io_uring when available).
+          async-backend = auto
       
     - name: Change default shell to fish
       when: ansible_os_family == "Darwin"
@@ -58,4 +68,3 @@
       homebrew:
         name: zoxide
         state: present
-
