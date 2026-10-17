@@ -9,3 +9,6 @@ dotfiles/fish/functions/_nvm_*.fish
 dotfiles/herdr/.config/herdr/*
 !dotfiles/herdr/.config/herdr/config.toml
 !dotfiles/herdr/.config/herdr/scripts/
+
+# macOS Finder metadata
+.DS_Store
