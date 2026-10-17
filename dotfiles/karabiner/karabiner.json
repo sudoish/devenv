@@ -51,28 +51,53 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Caps Lock to Escape, double tap Caps Lock to toggle Caps Lock",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "caps_lock_tapped",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    { "set_variable": { "name": "caps_lock_tapped", "value": 0 } },
+                                    {
+                                        "hold_down_milliseconds": 200,
+                                        "key_code": "caps_lock"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "parameters": { "basic.to_delayed_action_delay_milliseconds": 250 },
+                                "to": [
+                                    { "set_variable": { "name": "caps_lock_tapped", "value": 1 } },
+                                    { "key_code": "escape" }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_canceled": [{ "set_variable": { "name": "caps_lock_tapped", "value": 0 } }],
+                                    "to_if_invoked": [{ "set_variable": { "name": "caps_lock_tapped", "value": 0 } }]
+                                },
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
-            "devices": [
-                {
-                    "identifiers": { "is_keyboard": true },
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "caps_lock" },
-                            "to": [{ "key_code": "escape" }]
-                        }
-                    ]
-                }
-            ],
             "name": "Default profile",
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": { "key_code": "caps_lock" },
-                    "to": [{ "key_code": "escape" }]
-                }
-            ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         }
     ]
