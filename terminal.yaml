@@ -28,16 +28,24 @@
           # "auto" selects the best available backend (io_uring when available).
           async-backend = auto
       
+    - name: Register fish as a login shell on macos
+      when: ansible_os_family == "Darwin"
+      become: yes
+      lineinfile:
+        path: /etc/shells
+        line: "{{ '/opt/homebrew' if ansible_architecture == 'arm64' else '/usr/local' }}/bin/fish"
+
     - name: Change default shell to fish
       when: ansible_os_family == "Darwin"
       become: yes
       shell: >
-        chsh -s /usr/local/bin/fish
+        chsh -s {{ '/opt/homebrew' if ansible_architecture == 'arm64' else '/usr/local' }}/bin/fish {{ ansible_env.USER }}
 
     - name: Change default shell to fish
+      when: ansible_os_family != "Darwin"
       become: yes
       shell: >
-        chsh -s /usr/bin/fish
+        chsh -s /usr/bin/fish {{ ansible_env.USER }}
 
 
     - name: Install fisher plugin manager for fish

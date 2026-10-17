@@ -32,12 +32,20 @@
         - ansible_facts.system == "Linux"
         - herdr_installed.rc != 0
 
+    - name: Inspect existing Herdr config directory
+      ansible.builtin.stat:
+        path: "{{ ansible_facts.env.HOME }}/.config/herdr"
+        follow: false
+      register: herdr_config_dir
+
     - name: Inspect existing Herdr config
       ansible.builtin.stat:
         path: "{{ ansible_facts.env.HOME }}/.config/herdr/config.toml"
         follow: false
       register: herdr_config
 
+    # Stow may link the whole ~/.config/herdr directory into dotfiles, in which
+    # case config.toml is the managed file itself and must not be removed.
     - name: Back up unmanaged Herdr config
       ansible.builtin.copy:
         src: "{{ ansible_facts.env.HOME }}/.config/herdr/config.toml"
@@ -46,6 +54,7 @@
         force: false
         mode: preserve
       when:
+        - not herdr_config_dir.stat.islnk | default(false)
         - herdr_config.stat.exists
         - not herdr_config.stat.islnk
 
@@ -54,11 +63,12 @@
         path: "{{ ansible_facts.env.HOME }}/.config/herdr/config.toml"
         state: absent
       when:
+        - not herdr_config_dir.stat.islnk | default(false)
         - herdr_config.stat.exists
         - not herdr_config.stat.islnk
 
     - name: Apply Herdr dotfiles using Stow
       ansible.builtin.command:
         cmd: stow --restow -t "{{ ansible_facts.env.HOME }}" herdr
-        chdir: "{{ ansible_facts.env.HOME }}/dev/devenv/dotfiles"
+        chdir: "{{ playbook_dir }}/dotfiles"
       changed_when: false

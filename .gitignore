@@ -4,3 +4,8 @@
 dotfiles/fish/functions/fisher.fish
 dotfiles/fish/functions/nvm.fish
 dotfiles/fish/functions/_nvm_*.fish
+
+# Herdr runtime state (~/.config/herdr is stowed as a whole directory)
+dotfiles/herdr/.config/herdr/*
+!dotfiles/herdr/.config/herdr/config.toml
+!dotfiles/herdr/.config/herdr/scripts/

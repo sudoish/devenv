@@ -1,4 +1,5 @@
 # Keep Herdr close to the tmux workflow in dotfiles/tmux/.tmux.conf.
+# Scripts for bindings Herdr has no built-in action for live in scripts/.
 onboarding = false
 
 [theme]
@@ -16,14 +17,19 @@ new_cwd = "follow"
 prefix = "ctrl+a"
 
 # Tabs are the Herdr equivalent of tmux windows.
+# prefix+c asks for the tab name first (ui.prompt_new_tab_name), like `command-prompt "new-window -n %%"`.
 new_tab = "prefix+c"
 rename_tab = "prefix+comma"
 previous_tab = "prefix+p"
-next_tab = "prefix+n"
 switch_tab = "prefix+1..9"
+close_tab = "prefix+ampersand"
+# tmux's prefix+n prompts for a window number (see [[keys.command]] below),
+# and its next-window bindings are shadowed by pane navigation, so move next_tab aside.
+next_tab = "prefix+shift+right"
 
 # Workspaces are the closest equivalent to tmux sessions.
 rename_workspace = "prefix+shift+4"
+detach = "prefix+d"
 
 # Match the tmux split and pane-navigation bindings.
 split_vertical = "prefix+v"
@@ -32,15 +38,18 @@ focus_pane_left = "prefix+h"
 focus_pane_down = "prefix+j"
 focus_pane_up = "prefix+k"
 focus_pane_right = "prefix+l"
-
-# Herdr resizes one cell per press (tmux used five cells per press).
-resize_pane_left = "shift+left"
-resize_pane_down = "shift+down"
-resize_pane_up = "shift+up"
-resize_pane_right = "shift+right"
+last_pane = "prefix+semicolon"
+zoom = "prefix+z"
+close_pane = "prefix+x"
+copy_mode = "prefix+["
 
 # Reload without restarting panes.
 reload_config = "prefix+r"
+
+# Move Herdr defaults that collide with the tmux bindings above.
+settings = "prefix+shift+s"
+resize_mode = "prefix+shift+r"
+open_notification_target = "prefix+shift+o"
 
 # Keep vi-style movement in Herdr's navigate mode.
 navigate_pane_left = "h"
@@ -48,16 +57,76 @@ navigate_pane_down = "j"
 navigate_pane_up = "k"
 navigate_pane_right = "l"
 
-# Equivalent to the tmux `prefix+o` OpenCode window, but as a temporary pane.
+# `bind-key C-a send-prefix` is built in: pressing the prefix twice sends ctrl+a to the pane.
+
+# `bind-key n command-prompt "select-window -t :%%"`
+[[keys.command]]
+key = "prefix+n"
+type = "popup"
+command = "~/.config/herdr/scripts/select-tab.sh"
+description = "go to tab number"
+
+# `bind-key o new-window -n "opencode" -c "#{pane_current_path}" "opencode"`
 [[keys.command]]
 key = "prefix+o"
-type = "pane"
-command = "opencode"
-description = "open OpenCode"
+type = "shell"
+command = "~/.config/herdr/scripts/opencode-tab.sh"
+description = "open OpenCode tab"
+
+# vim-tmux-navigator: ctrl+h/j/k/l moves between panes, or within Vim/fzf when it is focused.
+[[keys.command]]
+key = "ctrl+h"
+type = "shell"
+command = "~/.config/herdr/scripts/navigate.sh left"
+description = "navigate left (vim aware)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "shell"
+command = "~/.config/herdr/scripts/navigate.sh down"
+description = "navigate down (vim aware)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "shell"
+command = "~/.config/herdr/scripts/navigate.sh up"
+description = "navigate up (vim aware)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "shell"
+command = "~/.config/herdr/scripts/navigate.sh right"
+description = "navigate right (vim aware)"
+
+# `bind -n S-Left resize-pane -L 5` and friends.
+[[keys.command]]
+key = "shift+left"
+type = "shell"
+command = "~/.config/herdr/scripts/resize.sh left 5"
+description = "resize pane left"
+
+[[keys.command]]
+key = "shift+down"
+type = "shell"
+command = "~/.config/herdr/scripts/resize.sh down 5"
+description = "resize pane down"
+
+[[keys.command]]
+key = "shift+up"
+type = "shell"
+command = "~/.config/herdr/scripts/resize.sh up 5"
+description = "resize pane up"
+
+[[keys.command]]
+key = "shift+right"
+type = "shell"
+command = "~/.config/herdr/scripts/resize.sh right 5"
+description = "resize pane right"
 
 [ui]
 mouse_capture = true
 copy_on_select = true
+prompt_new_tab_name = true
 tab_bar_position = "top"
 # Use tmux-like internal dividers without an outside frame or pane gaps.
 pane_borders = true
