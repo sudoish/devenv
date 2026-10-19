@@ -12,10 +12,10 @@ set -gx WORKDIR $HOME/dev
 # set -gx DYLD_FALLBACK_LIBRARY_PATH /opt/homebrew/opt/libmagic/lib $DYLD_FALLBACK_LIBRARY_PATH
 set -gx PATH "$HOME/.local/bin" $PATH
 
-# NGROK_TOKEN should be set as an environment variable or in a secrets file
-if test -f ~/.config/secrets/ngrok
-    source ~/.config/secrets/ngrok
-end
+# Secrets / machine-local env vars live outside this repo in ~/.config/secrets/*.env
+# (dotenv format: KEY=VALUE). See functions/load_env.fish.
+set -l env_files ~/.config/secrets/*.env
+load_env $env_files
 
 # Initialize nvm and use Node 20
 if test -f ~/.config/fish/functions/nvm.fish
