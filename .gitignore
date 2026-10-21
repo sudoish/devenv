@@ -12,3 +12,6 @@ dotfiles/herdr/.config/herdr/*
 
 # macOS Finder metadata
 .DS_Store
+
+# Amp orb portal registrations (generated per orb)
+.amp/portals/*

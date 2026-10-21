@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Prepares an Amp orb to work on this repository: Ansible for syntax checks and
+# --check dry runs, GNU Stow for dotfiles, and fish for `fish -n` script checks.
+# There is no .agents/resume: nothing needs authentication or reconnecting.
+# Must stay idempotent and fast on a warm snapshot.
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+step() {
+  local label=$1
+  shift
+  local start=$SECONDS
+  echo "==> $label"
+  "$@"
+  echo "    done in $((SECONDS - start))s"
+}
+
+install_apt_packages() {
+  # python3-apt lets Ansible's apt module run in --check mode.
+  local packages=(stow fish python3-apt)
+  local missing=()
+  local pkg
+  for pkg in "${packages[@]}"; do
+    dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "install ok installed" || missing+=("$pkg")
+  done
+  if ((${#missing[@]} == 0)); then
+    echo "    apt packages already installed"
+    return
+  fi
+  sudo apt-get update -qq
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends "${missing[@]}"
+}
+
+install_ansible() {
+  # The `ansible` package bundles community.general (used by the playbooks);
+  # its executables come from ansible-core.
+  if command -v ansible-playbook >/dev/null 2>&1; then
+    echo "    $(ansible-playbook --version | head -1)"
+    return
+  fi
+  uv tool install --python "$(cat .python-version)" ansible --with-executables-from ansible-core
+}
+
+step "Install apt packages" install_apt_packages
+step "Install Ansible" install_ansible
+step "Check playbook syntax" ansible-playbook --syntax-check -i localhost, main.yaml
