@@ -1,0 +1,28 @@
+dotfiles/rex/init.lua
+  s_107813c05352b8::t_3f3a630a8ab1a7 1
+  s_107813c05352b8::t_a1abba88935fe3 2-184
+dotfiles/rex/catppuccin-mocha.ghostty
+  s_107813c05352b8::t_08f2d62403dca7 1-22
+CLAUDE.md
+  s_107813c05352b8::t_85095281661d0d 14,33,48
+main.yaml
+  s_107813c05352b8::t_45ed314ebf6925 50-52
+rex.yaml
+  s_107813c05352b8::t_f29331998e2ca8 1-61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6a3ca05569ff5daf0590a5ac9656444cf92fe610",
+  "prompts": {},
+  "sessions": {
+    "s_107813c05352b8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f4a0e306-2265-4927-888d-dc9001a57731",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "Thiago Pacheco <hi@sudoish.com>"
+    }
+  }
+}
