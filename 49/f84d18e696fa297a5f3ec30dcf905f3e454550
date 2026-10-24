@@ -1,0 +1,19 @@
+dotfiles/rex/init.lua
+  s_107813c05352b8::t_47fba92a2a85dc 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "49f84d18e696fa297a5f3ec30dcf905f3e454550",
+  "prompts": {},
+  "sessions": {
+    "s_107813c05352b8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f4a0e306-2265-4927-888d-dc9001a57731",
+        "model": "unknown"
+      },
+      "human_author": "Thiago Pacheco <hi@sudoish.com>"
+    }
+  }
+}
