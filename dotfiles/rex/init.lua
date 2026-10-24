@@ -1,3 +1,4 @@
+-- Rex configuration (~/.config/rex/init.lua), managed by devenv/dotfiles/rex.
 --
 -- Mirrors the tmux (dotfiles/tmux/.tmux.conf) and Herdr (dotfiles/herdr) key
 -- scheme: ctrl+a prefix, vim-style pane movement, shift+arrows to resize.
@@ -143,13 +144,6 @@ rex.bind(p(prefix), "pane.send_key", { key = prefix })
 rex.bind(p("c"), "tab_new_named")
 rex.bind(p(","), "client.tab.rename")
 rex.bind(p("p"), "client.tab.previous")
-Add Rex number keys for tabs and sessions
-
-ctrl+1..9 jumps to the Nth tab and cmd+1..9 to the Nth session. Sessions
-have no built-in go-to-by-number action, so a session_goto action looks
-the session up from session.list and asks the app to show it.
-
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
 rex.bind(p("shift+right"), "client.tab.next")
 rex.bind(p("shift+7"), "client.tab.close") -- &
 rex.bind(p("o"), "opencode_tab")
