@@ -1,4 +1,3 @@
--- Rex configuration (~/.config/rex/init.lua), managed by devenv/dotfiles/rex.
 --
 -- Mirrors the tmux (dotfiles/tmux/.tmux.conf) and Herdr (dotfiles/herdr) key
 -- scheme: ctrl+a prefix, vim-style pane movement, shift+arrows to resize.
@@ -93,6 +92,24 @@ rex.action{
   end,
 }
 
+-- cmd+1..9: jump to the Nth session in server order (new sessions go at the end).
+rex.action{
+  name = "session_goto",
+  title = "Go to Session by Number",
+  category = "Session",
+  args = { index = "integer" },
+  run = function(ctx, args)
+    local list, err = rex.call("session.list", {})
+    if not list then
+      error(err)
+    end
+    local target = (list.sessions or {})[args.index]
+    if target then
+      rex.client.queue("session.select", { session_id = target.session_id })
+    end
+  end,
+}
+
 -- vim-tmux-navigator: ctrl+h/j/k/l moves between panes, unless Vim or fzf is
 -- in the foreground, in which case the key goes to the program.
 local function is_vim_like(name)
@@ -126,11 +143,20 @@ rex.bind(p(prefix), "pane.send_key", { key = prefix })
 rex.bind(p("c"), "tab_new_named")
 rex.bind(p(","), "client.tab.rename")
 rex.bind(p("p"), "client.tab.previous")
+Add Rex number keys for tabs and sessions
+
+ctrl+1..9 jumps to the Nth tab and cmd+1..9 to the Nth session. Sessions
+have no built-in go-to-by-number action, so a session_goto action looks
+the session up from session.list and asks the app to show it.
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
 rex.bind(p("shift+right"), "client.tab.next")
 rex.bind(p("shift+7"), "client.tab.close") -- &
 rex.bind(p("o"), "opencode_tab")
 for i = 1, 9 do
   rex.bind(p(tostring(i)), "client.tab.goto", { index = i })
+  rex.bind("ctrl+" .. tostring(i), "client.tab.goto", { index = i })
+  rex.bind("cmd+" .. tostring(i), "session_goto", { index = i })
 end
 
 -- Sessions (tmux sessions / Herdr workspaces)
