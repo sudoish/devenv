@@ -1,0 +1,61 @@
+- name: Rex config
+  tags:
+    - rex
+  vars:
+    # Rex keeps appearance in the app's settings (macOS defaults), not in
+    # init.lua. These match the Ghostty macOS values: font-size 18 comes from
+    # platform.conf in terminal.yaml, the cursor and font from dotfiles/ghostty/config.
+    rex_appearance:
+      - { key: Workspace.terminalFontName, type: string, value: JetBrainsMono Nerd Font }
+      - { key: Workspace.terminalFontPointSize, type: float, value: "18" }
+      - { key: Workspace.terminalCursorStyle, type: string, value: block }
+  block:
+    - name: Ensure rex dir exists
+      file:
+        path: ~/.config/rex
+        state: directory
+
+    - name: Stow rex config
+      shell: >
+        stow --adopt -t ~/.config/rex/ -d dotfiles rex
+
+    - name: Read current Rex appearance settings
+      command: defaults read com.superlogical.rex {{ item.key }}
+      loop: "{{ rex_appearance }}"
+      loop_control:
+        label: "{{ item.key }}"
+      register: rex_current
+      failed_when: false
+      changed_when: false
+      when: ansible_facts["os_family"] == "Darwin"
+
+    - name: Match Rex appearance to Ghostty
+      command: defaults write com.superlogical.rex {{ item.item.key }} -{{ item.item.type }} "{{ item.item.value }}"
+      loop: "{{ rex_current.results | default([]) }}"
+      loop_control:
+        label: "{{ item.item.key }}"
+      register: rex_written
+      when:
+        - ansible_facts["os_family"] == "Darwin"
+        - (item.stdout | default('')) != (item.item.value | string)
+
+    # Rex only reads these settings at launch. Sessions live in the separate Rex
+    # server process, so relaunching the app does not lose any terminals.
+    - name: Relaunch Rex so it picks up the appearance settings
+      shell: |
+        if [ "$(osascript -e 'application "Rex Beta" is running')" = "true" ]; then
+          osascript -e 'quit app "Rex Beta"'
+          sleep 3
+          open -a "Rex Beta"
+        fi
+      when:
+        - ansible_facts["os_family"] == "Darwin"
+        - rex_written.changed | default(false)
+
+    # The theme itself is imported once from the Command Palette:
+    # "Add a Ghostty or iTerm palette to your custom themes" -> ~/.config/rex/catppuccin-mocha.ghostty
+
+    - name: Reload Rex config
+      command: rex config reload
+      failed_when: false
+      changed_when: false

@@ -47,3 +47,6 @@
     - include_tasks: omarchy.yaml
       tags:
         - omarchy
+    - include_tasks: rex.yaml
+      tags:
+        - rex

@@ -11,7 +11,7 @@ This is an Ansible-based development environment setup repository that automates
 The repository uses a **modular Ansible playbook structure** where `main.yaml` orchestrates individual component installations through tagged task files. Each YAML file in the root handles a specific aspect of the development environment:
 
 - **Core utilities**: `utils.yaml` (jq, fish, starship, fzf, ripgrep, zoxide)
-- **Terminal setup**: `terminal.yaml` (Ghostty terminal, Fish shell, Starship prompt)
+- **Terminal setup**: `terminal.yaml` (Ghostty terminal, Fish shell, Starship prompt), `rex.yaml` (Rex multiplexer keybinds + appearance defaults)
 - **Development languages**: `node.yaml`, `rust.yaml`, `python.yaml`
 - **Editors/Tools**: `zed.yaml`, `git.yaml`, `karabiner.yaml`
 - **Infrastructure**: `nix.yaml`, `ngrok.yaml`, `ssh.yaml`
@@ -30,7 +30,7 @@ ansible-playbook -i localhost, main.yaml --tags zed,git
 ansible-playbook -i localhost, main.yaml --tags python,node,rust
 
 # Apply dotfile changes (run from dotfiles directory)
-cd dotfiles && stow fish ghostty zed karabiner starship
+cd dotfiles && stow fish ghostty rex zed karabiner starship
 ```
 
 ## Key Configurations
